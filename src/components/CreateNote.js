@@ -1,35 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
 
-const EditNote = ({ match, history }) => {
+const CreateNote = ({ match, history }) => {
   const [note, setNote] = useState({});
-  const { id } = useParams();
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchNote = async () => {
-      try {
-        const response = await axios.get(`http://localhost:8000/api/notes/${id}`);
-        setNote(response.data);
-        setLoading(false);
-      } catch (error) {
-        console.error('Ошибка при загрузке заметки:', error);
-        setLoading(false);
-      }
-    };
-
-    fetchNote();
-  }, [id]);
 
   const handleUpdateNote = async () => {
     try {
+      // Добавляем user_id из localStorage
+      const userId = localStorage.getItem('id');
+      // Добавляем created_at и updated_at
+      const createdAt = new Date().toISOString();
+      const updatedAt = createdAt;
+
+      // Обновляем заметку с новыми полями
+      const updatedNote = { ...note, user_id: userId, created_at: createdAt, updated_at: updatedAt };
+
       // Отправляем запрос на обновление заметки
-      console.log(note)
-      await axios.put(`http://localhost:8000/api/notes/${id}`, note);
+      await axios.post(`http://localhost:8000/api/notes/`, updatedNote);
+
       // После успешного обновления перенаправляем пользователя, например, на список заметок
       history.push('/notes');
-      
     } catch (error) {
       console.error('Ошибка при обновлении заметки:', error);
     }
@@ -39,10 +29,6 @@ const EditNote = ({ match, history }) => {
     const { name, value } = e.target;
     setNote((prevNote) => ({ ...prevNote, [name]: value }));
   };
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div>
@@ -58,4 +44,4 @@ const EditNote = ({ match, history }) => {
   );
 };
 
-export default EditNote;
+export default CreateNote;

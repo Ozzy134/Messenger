@@ -37,6 +37,9 @@ const NotesList = ({ notes, onDelete }) => {
         key="actions"
         render={(text, record) => (
           <Space size="middle" rey="actions1">
+            <Link to={`/create/`}>
+              <Button type="primary">Создать</Button>
+            </Link>
             <Link to={`/edit/${record.id}`}>
               <Button type="primary">Изменить</Button>
             </Link>

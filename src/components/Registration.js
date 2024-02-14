@@ -16,7 +16,7 @@ const Registration = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:8000/api/register`, formData);
+      const response = await axios.post(`http://localhost:8000/api/register/`, formData);
       console.log(response.data);
       // Redirect to login page after successful registration
       // You can use useHistory hook or react-router-dom for redirection

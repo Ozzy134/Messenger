@@ -37,10 +37,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app.apps.AppConfig',
     'rest_framework',
-    'rest_framework.authtoken',
     'corsheaders',
+    'rest_framework.authtoken',
+    'app.apps.AppConfig',
+]
+
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:3000",  # Add the origins from which you want to allow requests
+    "http://192.168.1.2:3000",
+    "https://localhost:3000",  # Add the origins from which you want to allow requests
+    "https://192.168.1.2:3000",
 ]
 
 CORS_ALLOWED_ORIGINS = [
@@ -74,6 +81,16 @@ CACHE_MIDDLEWARE_KEY_PREFIX = ''
 CACHE_MIDDLEWARE_SECONDS = 600
 
 ROOT_URLCONF = 'project.urls'
+
+
+# Используйте модель пользователя по умолчанию, где поле username является идентификатором пользователя
+AUTH_USER_MODEL = 'auth.User'
+
+# Используйте бэкенд аутентификации, который поддерживает аутентификацию по username
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',  # Поддерживает аутентификацию по username
+    # Другие бэкенды аутентификации, если нужно
+]
 
 TEMPLATES = [
     {
