@@ -25,7 +25,7 @@ class NoteSerializer(serializers.ModelSerializer):
         fields = ['id', 'user_id', 'title', 'description', 'created_at', 'updated_at']
         extra_kwargs = {
             'id': {'required': False},
-            'user_id': {'required': True},
+            'user_id': {'required': False},
             'title': {'required': True},
             'description': {'required': True},
             'created_at': {'required': False},

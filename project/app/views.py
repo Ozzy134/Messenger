@@ -6,6 +6,7 @@ from rest_framework.views import APIView
 from django.contrib.auth import authenticate
 from .models import Note
 from .serializers import NoteSerializer, UserSerializer, UserAuthenticationSerializer
+from rest_framework.permissions import IsAuthenticated
 
 class UserListView(generics.ListAPIView):
     queryset = User.objects.all()
@@ -15,20 +16,31 @@ class NoteListCreateView(generics.ListCreateAPIView):
     queryset = Note.objects.all()
     serializer_class = NoteSerializer
 
+    def delete(self, request, pk):
+        instance = self.get_object()  # Получаем объект, который нужно удалить
+        self.perform_destroy(instance)  # Вызываем метод perform_destroy, чтобы выполнить удаление
+        return Response(status=status.HTTP_204_NO_CONTENT)  # Возвращаем успешный ответ без содержимого
+
 class NoteDetailView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticated]
     queryset = Note.objects.all()
     serializer_class = NoteSerializer
 
-"""
-class RegisterView(generics.CreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = [permissions.AllowAny]
+    def delete(self, request, pk):
+        instance = self.get_object(pk)  # Получаем объект, который нужно удалить
+        instance.delete()  # Вызываем метод perform_destroy, чтобы выполнить удаление
+        return Response(status=status.HTTP_204_NO_CONTENT)  # Возвращаем успешный ответ без содержимого
 
-    def perform_create(self, serializer):
-        user = serializer.save()
-        Token.objects.create(user=user)
-"""
+# """
+# class RegisterView(generics.CreateAPIView):
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
+#     permission_classes = [permissions.AllowAny]
+#
+#     def perform_create(self, serializer):
+#         user = serializer.save()
+#         Token.objects.create(user=user)
+# """
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer

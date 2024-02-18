@@ -7,10 +7,9 @@ const { Column } = Table;
 
 const NotesList = ({ notes, onDelete }) => {
   const handleDelete = async (record) => {
-    console.log(record)
     try {
       // Выполняем запрос на удаление с использованием axios
-      await axios.delete(`http://127.0.0.1:8000/api/notes/${record.id}`);
+      await axios.delete(`http://localhost:8000/api/notes/${record.id}/`);
       // Выполняем обновление списка заметок (или других действий) после успешного удаления
       onDelete(record.id);
     } catch (error) {

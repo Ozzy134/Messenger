@@ -18,7 +18,7 @@ const App = () => {
       try {
         const user_id = localStorage.getItem('id')
         const response = await axios.get(`http://127.0.0.1:8000/api/notes/${user_id}/`);
-        console.log(response)
+        console.log(response.data)
         setNotes(response.data);
       } catch (error) {
         console.error('Ошибка при получении списка заметок:', error);
