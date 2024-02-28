@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import './EditNote.css'
 
 const EditNote = ({ match, history }) => {
   const [note, setNote] = useState({});
@@ -10,7 +11,7 @@ const EditNote = ({ match, history }) => {
   useEffect(() => {
     const fetchNote = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/notes/${id}`);
+        const response = await axios.get(`http://localhost:8000/api/notes/${id}/`);
         setNote(response.data);
         setLoading(false);
       } catch (error) {
@@ -26,7 +27,7 @@ const EditNote = ({ match, history }) => {
     try {
       // Отправляем запрос на обновление заметки
       console.log(note)
-      await axios.put(`http://localhost:8000/api/notes/${id}`, note);
+      await axios.put(`http://localhost:8000/api/notes/${id}/`, note);
       // После успешного обновления перенаправляем пользователя, например, на список заметок
       history.push('/notes');
       
@@ -45,15 +46,15 @@ const EditNote = ({ match, history }) => {
   }
 
   return (
-    <div>
-      <h1>Edit Note</h1>
-      <label>Title:</label>
-      <input type="text" name="title" value={note.title} onChange={handleChange} />
-      <br />
-      <label>Description:</label>
-      <textarea name="description" value={note.description} onChange={handleChange}></textarea>
-      <br />
-      <button onClick={handleUpdateNote}>Update Note</button>
+    <div className='contayner'>
+      <div className='form'>
+        <h1>Edit Note</h1>
+        <div className='form__input'>
+          <input type="text" name="title" value={note.title} onChange={handleChange} />
+          <textarea name="description" value={note.description} placeholder='   Description' onChange={handleChange}></textarea>
+        </div>
+        <button onClick={handleUpdateNote}>Update Note</button>
+      </div>  
     </div>
   );
 };

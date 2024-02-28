@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './Auth.css'
 
 const Auth = () => {
   const [formData, setFormData] = useState({
@@ -25,13 +26,15 @@ const Auth = () => {
   };
 
   return (
-    <div>
-      <h1>Auth</h1>
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="username" value={formData.username} onChange={handleChange} placeholder="Username" required />
-        <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" required />
-        <button type="submit">Auth</button>
-      </form>
+    <div class='contayner'>
+      <div class='form'>
+        <h1>Login</h1>
+        <form onSubmit={handleSubmit}>
+          <input type="text" name="username" value={formData.username} onChange={handleChange} placeholder="Username" required />
+          <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" required />
+          <button type="submit">Login</button>
+        </form>
+      </div>  
     </div>
   );
 };

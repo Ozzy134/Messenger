@@ -1,28 +1,24 @@
 import React from 'react';
-import { redirect } from 'react-router-dom';
 import './Home.css'
 
 const Home = () => {
-
-  const Note = () => {
-    redirect('http://localhost:3000/notes')
-  };
-
   return (
     <div class='container'>
       <div className='header'>
-        <button src='http://localhost:3000/notes'>Ваши заметки</button>
-        <button url='http://localhost:3000/auth'>Войти</button>
+        <a href='/notes'><button >Ваши заметки</button></a>
+        <a className='header-btn-v' href='/auth'><button >Войти</button></a>
         <a href='/register'><button>Регистрация</button></a>
       </div>
       <div class='main'>
-        <h1 class='main__text'>Организация вашего времени - наша обязанность</h1>
-        <button class='main__btn'>Создать заметку</button>
+        <div class='main__contayner'>
+          <h1 class='main__text'>Организация вашего времени - наша обязанность</h1>
+          <a href='/create' className='main__btn'><button className='main__btn'>Создать заметку</button></a>
+        </div>
       </div>
       <div class='footer'>
-        <a url=''>VKontakte</a>
-        <a url=''>Telegramm</a>
-        <a url=''>Discord</a>
+        <a href='https://vk.com/lexababnv'>VKontakte</a>
+        <a href='https://web.telegram.org/k/#@lexababnv'>Telegram</a>
+        <a href='https://discord.com/channels/@me'>Discord</a>
       </div>
     </div>
   );

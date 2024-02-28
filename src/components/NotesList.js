@@ -18,6 +18,9 @@ const NotesList = ({ notes, onDelete }) => {
   };
 
   return (
+    <Button type="danger">
+      Создать заметку
+    </Button>,
     <Table dataSource={notes}>
       <Column
         title="Заголовок"
@@ -25,7 +28,7 @@ const NotesList = ({ notes, onDelete }) => {
         key="title"
         render={(id, record) => (
           <Space size="middle">
-            <Link to={`/notes/${id}`}>{record.title}</Link>
+            <Link to={`/notes/${record.id}`}>{record.title}</Link>
           </Space>
         )}
       />
@@ -36,9 +39,6 @@ const NotesList = ({ notes, onDelete }) => {
         key="actions"
         render={(text, record) => (
           <Space size="middle" rey="actions1">
-            <Link to={`/create/`}>
-              <Button type="primary">Создать</Button>
-            </Link>
             <Link to={`/edit/${record.id}`}>
               <Button type="primary">Изменить</Button>
             </Link>

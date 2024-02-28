@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './EditNote.css'
 
 const CreateNote = ({ match, history }) => {
   const [note, setNote] = useState({});
@@ -31,15 +32,15 @@ const CreateNote = ({ match, history }) => {
   };
 
   return (
-    <div>
-      <h1>Edit Note</h1>
-      <label>Title:</label>
-      <input type="text" name="title" value={note.title} onChange={handleChange} />
-      <br />
-      <label>Description:</label>
-      <textarea name="description" value={note.description} onChange={handleChange}></textarea>
-      <br />
-      <button onClick={handleUpdateNote}>Update Note</button>
+    <div class='contayner'>
+      <div class='form'>
+        <h1>Create Note</h1>
+        <div class='form__input'>
+          <input type="text" name="title" value={note.title} placeholder='Title' onChange={handleChange} />
+          <textarea name="description" value={note.description} placeholder='   Description' onChange={handleChange}></textarea>
+        </div>  
+        <button onClick={handleUpdateNote}>Create Note</button>
+      </div>
     </div>
   );
 };

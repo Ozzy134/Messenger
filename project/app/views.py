@@ -16,20 +16,21 @@ class NoteListCreateView(generics.ListCreateAPIView):
     queryset = Note.objects.all()
     serializer_class = NoteSerializer
 
-    def delete(self, request, pk):
-        instance = self.get_object()  # Получаем объект, который нужно удалить
-        self.perform_destroy(instance)  # Вызываем метод perform_destroy, чтобы выполнить удаление
-        return Response(status=status.HTTP_204_NO_CONTENT)  # Возвращаем успешный ответ без содержимого
+    # def delete(self, request, pk):
+    #     instance = self.get_object()  # Получаем объект, который нужно удалить
+    #     self.perform_destroy(instance)  # Вызываем метод perform_destroy, чтобы выполнить удаление
+    #     return Response(status=status.HTTP_204_NO_CONTENT)  # Возвращаем успешный ответ без содержимого
 
-class NoteDetailView(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = [IsAuthenticated]
+class NoteDetailView(APIView):
     queryset = Note.objects.all()
     serializer_class = NoteSerializer
+    print(queryset)
 
-    def delete(self, request, pk):
-        instance = self.get_object(pk)  # Получаем объект, который нужно удалить
-        instance.delete()  # Вызываем метод perform_destroy, чтобы выполнить удаление
-        return Response(status=status.HTTP_204_NO_CONTENT)  # Возвращаем успешный ответ без содержимого
+
+    # def delete(self, request, pk):
+    #     instance = self.get_object(pk)  # Получаем объект, который нужно удалить
+    #     instance.delete()  # Вызываем метод perform_destroy, чтобы выполнить удаление
+    #     return Response(status=status.HTTP_204_NO_CONTENT)  # Возвращаем успешный ответ без содержимого
 
 # """
 # class RegisterView(generics.CreateAPIView):

@@ -38,7 +38,7 @@ class Note(models.Model):
     updated_at = models.DateTimeField()
 
     def __str__(self):
-        return self.user_id
+        return self.title
 
 class User(models.Model):
     email = models.EmailField()
